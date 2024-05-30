@@ -1,0 +1,11 @@
+1. login authentication 
+ - Same login page for doctors and patients, inside of the user we will store a field that determines the user type
+2. create user
+3. update user
+
+CRUD (Create Read Update Delete)
+
+4. Create appointment
+5. Delete appointment
+6. Update appointment
+7. Get appointment
