@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -16,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   final _formKeyEmail = GlobalKey<FormState>();
   final _formKeyPassword = GlobalKey<FormState>();
   final _formKeyConfirmPassword = GlobalKey<FormState>();
+  bool isDoctor = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +112,18 @@ class _SignUpState extends State<SignUp> {
                         )
                       ],
                     ))),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: DoctorDropdown(
+                onValueChange: (value) {
+                  if (value == 'Doctor') {
+                    setState(() => isDoctor = true);
+                  } else {
+                    isDoctor = false;
+                  }
+                },
+              ),
+            ),
             ElevatedButton(
               child: Text('Sign Up'),
               onPressed: () async {
@@ -115,19 +131,79 @@ class _SignUpState extends State<SignUp> {
                 print(inputPassword);
                 print(_formKeyEmail.currentState);
                 print(_formKeyPassword.currentState);
+                //need logic for confirm password
                 if (_formKeyEmail.currentState!.validate() &&
                     _formKeyPassword.currentState!.validate()) {
                   _formKeyEmail.currentState!.save();
                   _formKeyPassword.currentState!.save();
                   await AuthService()
                       .signUpWithEmailAndPassword(inputEmail, inputPassword)
-                      .then((e) =>
-                          MaterialPageRoute(builder: (context) => LogIn()));
+                      .then((e) {
+                    AuthService()
+                        .signInWithEmailAndPassword(inputEmail, inputPassword)
+                        .then((e) {
+                      AuthService().setUserInfo(
+                          FirebaseAuth.instance.currentUser!.uid, isDoctor);
+                    }).then((e) {
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        print(FirebaseAuth
+                            .instance.currentUser?.uid); //this gets the uid
+                        if (AuthService().isUserDoctor(
+                            FirebaseAuth.instance.currentUser!.uid)) {
+                          //navigate to doctor homepage
+                        } else {
+                          //navigate to patient homepage
+                        }
+                      }
+                    });
+                  });
                 }
                 MaterialPageRoute(builder: (context) => LogIn());
               },
             ),
           ]),
         ));
+  }
+}
+
+const List<String> list = <String>['Patient', 'Doctor'];
+
+class DoctorDropdown extends StatefulWidget {
+  const DoctorDropdown({super.key, required this.onValueChange});
+  final ValueChanged<String?> onValueChange;
+  @override
+  State<DoctorDropdown> createState() =>
+      _DoctorDropdownState(onValueChange: onValueChange);
+}
+
+class _DoctorDropdownState extends State<DoctorDropdown> {
+  String dropdownValue = list.first;
+  _DoctorDropdownState({required this.onValueChange});
+  final ValueChanged<String?> onValueChange;
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      elevation: 16,
+      style: const TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String? value) {
+        // This is called when the user selects an item.
+        setState(() {
+          onValueChange(value);
+          dropdownValue = value!;
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
   }
 }
