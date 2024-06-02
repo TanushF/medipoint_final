@@ -51,6 +51,19 @@ class _LogInState extends State<LogIn> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                key: _formKeyPassword,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  hintText: 'Password',
+                  filled: true,
+                ),
+                onChanged: (value) => inputPassword = value,
+              ),
+            ),
             ElevatedButton(
               child: Text('Sign In'),
               onPressed: () async {

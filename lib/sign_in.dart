@@ -3,27 +3,30 @@ import 'login_page.dart';
 
 //RENAME FROM SIGn IN tO SOMEThING ELSE
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Home> createState() => _HomeState();
 }
 
-class _SignInState extends State<SignIn> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text('Medipoint'),
+        ),
         body: Container(
+          margin: const EdgeInsets.all(5.0),
           child: Column(children: [
-            ElevatedButton(
-              child: Text('log in'),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LogIn()),
-              ),
-            )
+            // ElevatedButton(
+            //   child: Text('Log In'),
+            //   onPressed: () => Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => LogIn()),
+            //   ),
+            // )
           ]),
         ));
   }

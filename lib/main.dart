@@ -10,6 +10,8 @@ import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
 //import 'logged_in_view.dart';
 import 'sign_in.dart';
+import 'login_page.dart';
+import 'sign_up.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,15 +19,51 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (kDebugMode) {
-    try {
-      FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-      await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-  }
+  runApp(const MyApp());
+}
 
-  runApp(SignIn());
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Medipoint App',
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Medipoint'),
+        ),
+        body: Container(
+          margin: const EdgeInsets.all(5.0),
+          child: Column(children: [
+            ElevatedButton(
+              child: Text('Log In'),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LogIn()),
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Sign Up'),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUp()),
+              ),
+            )
+          ]),
+        ));
+  }
 }

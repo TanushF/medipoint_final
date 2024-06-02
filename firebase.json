@@ -1,1 +1,78 @@
-{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"emulators":{"auth":{"port":9099},"functions":{"port":5001},"firestore":{"port":8080},"database":{"port":9000},"hosting":{"port":5000},"pubsub":{"port":8085},"storage":{"port":9199},"eventarc":{"port":9299},"ui":{"enabled":true},"singleProjectMode":true},"flutter":{"platforms":{"android":{"default":{"projectId":"medipoint-90241","appId":"1:930344622459:android:d9c616713b8666bdf405de","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"medipoint-90241","appId":"1:930344622459:ios:bc91fbf9275969fef405de","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"medipoint-90241","appId":"1:930344622459:ios:bc91fbf9275969fef405de","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"medipoint-90241","configurations":{"android":"1:930344622459:android:d9c616713b8666bdf405de","ios":"1:930344622459:ios:bc91fbf9275969fef405de","macos":"1:930344622459:ios:bc91fbf9275969fef405de","web":"1:930344622459:web:b04be97854639cb9f405de","windows":"1:930344622459:web:70c45ed1a6e35f25f405de"}}}}}}
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "pubsub": {
+      "port": 8085
+    },
+    "storage": {
+      "port": 9199
+    },
+    "eventarc": {
+      "port": 9299
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "medipoint-90241",
+          "appId": "1:930344622459:android:d9c616713b8666bdf405de",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "medipoint-90241",
+          "appId": "1:930344622459:ios:bc91fbf9275969fef405de",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "medipoint-90241",
+          "appId": "1:930344622459:ios:bc91fbf9275969fef405de",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "medipoint-90241",
+          "configurations": {
+            "android": "1:930344622459:android:d9c616713b8666bdf405de",
+            "ios": "1:930344622459:ios:bc91fbf9275969fef405de",
+            "macos": "1:930344622459:ios:bc91fbf9275969fef405de",
+            "web": "1:930344622459:web:b04be97854639cb9f405de",
+            "windows": "1:930344622459:web:70c45ed1a6e35f25f405de"
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
