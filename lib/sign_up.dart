@@ -144,11 +144,14 @@ class _SignUpState extends State<SignUp> {
                         .then((e) {
                       AuthService().setUserInfo(
                           FirebaseAuth.instance.currentUser!.uid, isDoctor);
-                    }).then((e) {
+                    }).then((e) async {
                       if (FirebaseAuth.instance.currentUser != null) {
                         print(FirebaseAuth
-                            .instance.currentUser?.uid); //this gets the uid
-                        if (AuthService().isUserDoctor(
+                            .instance.currentUser!.uid); //this gets the uid
+                        print('1');
+                        print(AuthService().isUserDoctor(
+                            FirebaseAuth.instance.currentUser!.uid));
+                        if (await AuthService().isUserDoctor(
                             FirebaseAuth.instance.currentUser!.uid)) {
                           //navigate to doctor homepage
                         } else {

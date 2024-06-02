@@ -16,24 +16,13 @@ class User {
   ) {
     final data = snapshot.data();
     return User(
-      name: data?['name'],
-      state: data?['state'],
-      country: data?['country'],
-      capital: data?['capital'],
-      population: data?['population'],
-      regions:
-          data?['regions'] is Iterable ? List.from(data?['regions']) : null,
+      isDoctor: data?['isDoctor'],
     );
   }
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (name != null) "name": name,
-      if (state != null) "state": state,
-      if (country != null) "country": country,
-      if (capital != null) "capital": capital,
-      if (population != null) "population": population,
-      if (regions != null) "regions": regions,
+      if (isDoctor != null) "name": isDoctor,
     };
   }
 }
@@ -42,7 +31,15 @@ class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
 
-  bool isUserDoctor(String uid) async {}
+  Future<bool> isUserDoctor(String uid) async {
+    final ref = await db.collection("users").doc(uid).withConverter(
+          fromFirestore: User.fromFirestore,
+          toFirestore: (User user, _) => user.toFirestore(),
+        );
+    final docSnap = await ref.get();
+    print(docSnap.get('isDoctor'));
+    return docSnap.get('isDoctor');
+  }
 
   Future<dynamic> getUserInfo(String uid) async {
     await db.collection("users").doc(uid).get().then(
