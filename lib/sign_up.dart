@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medipoint_final/patientHome.dart';
 import 'auth.dart';
 import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -153,15 +154,19 @@ class _SignUpState extends State<SignUp> {
                             FirebaseAuth.instance.currentUser!.uid));
                         if (await AuthService().isUserDoctor(
                             FirebaseAuth.instance.currentUser!.uid)) {
-                          //navigate to doctor homepage
+                          // return MaterialPageRoute(
+                          //   builder: (context) => patientHome()); doctorHome
                         } else {
-                          //navigate to patient homepage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => patientHome()),
+                          );
                         }
                       }
                     });
                   });
                 }
-                MaterialPageRoute(builder: (context) => LogIn());
               },
             ),
           ]),
